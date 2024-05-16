@@ -1,13 +1,13 @@
-const BLOGPOSTSREQ =
-  "https://www.googleapis.com/blogger/v3/blogs/5765625164803845699/posts?maxResults=5&key=";
-
 export default function Home({ postItems }) {
   return (
     <div>
       {postItems ? (
         <ul>
           {postItems.map((post) => (
-            <li key={post.id}>{post.title}</li>
+            // <li key={post.id}>{post.title}</li>
+            <li key={post.id}>
+              <a href={`/posts/${post.id}`}>{post.title}</a>
+            </li>
           ))}
         </ul>
       ) : (
@@ -20,7 +20,7 @@ export default function Home({ postItems }) {
 // This function gets called at build time
 export async function getStaticProps() {
   // Call an external API endpoint to get posts
-  const blogReqURL = BLOGPOSTSREQ + process.env.APIKEY;
+  const blogReqURL = `${process.env.BLOGURL}/posts?maxResults=${process.env.MAXRESULTS}&key=${process.env.APIKEY}`;
   const res = await fetch(blogReqURL);
   const response = await res.json();
 
