@@ -1,19 +1,35 @@
+import styles from "@/styles/Home.module.css";
+import Head from "next/head";
 export default function Home({ postItems }) {
   return (
-    <div>
-      {postItems ? (
+    <>
+      <Head>
+        <title>Test Next.js SSG</title>
+        <meta
+          name="description"
+          content="Test Next.js static site generation"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <main className={styles.main}>
+        <h1>Very simple test app to generate static site</h1>
+        <p>
+          It uses getStaticProps() and getStaticPaths() functions of Next.js and
+          gets certain number of blog posts from a specific blog using Blogger
+          v3.0 API. The index page as well as the blog posts pages can be
+          statically generated using npm build.
+        </p>
+        <h2>Blog Posts</h2>
         <ul>
           {postItems.map((post) => (
-            // <li key={post.id}>{post.title}</li>
             <li key={post.id}>
               <a href={`/posts/${post.id}`}>{post.title}</a>
             </li>
           ))}
         </ul>
-      ) : (
-        <p>postItems is false (null or undefined)</p>
-      )}
-    </div>
+      </main>
+    </>
   );
 }
 
